@@ -150,11 +150,6 @@ $today = date('Y-m-d');
 $week_start = date('Y-m-d', strtotime('monday this week'));
 $month_start = date('Y-m-01');
 
-// Daily orders count
-$stmt = $pdo->prepare("SELECT COUNT(*) as daily_orders FROM orders WHERE DATE(order_date) = ?");
-$stmt->execute([$today]);
-$daily_orders = $stmt->fetch()['daily_orders'];
-
 // Weekly orders count
 $stmt = $pdo->prepare("SELECT COUNT(*) as weekly_orders FROM orders WHERE DATE(order_date) >= ?");
 $stmt->execute([$week_start]);
@@ -195,11 +190,6 @@ $monthly_orders = $stmt->fetch()['monthly_orders'];
         <div class="dashboard-content">
             <!-- Key Metrics -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                <div style="background: linear-gradient(135deg, #dc3545, #c82333); color: white; padding: 2rem; border-radius: 15px; text-align: center;">
-                    <h3>Daily Orders</h3>
-                    <p style="font-size: 2rem; font-weight: 600;"><?php echo $daily_orders; ?></p>
-                    <small>Orders placed today</small>
-                </div>
                 <div style="background: linear-gradient(135deg, #fd7e14, #e55a00); color: white; padding: 2rem; border-radius: 15px; text-align: center;">
                     <h3>Weekly Orders</h3>
                     <p style="font-size: 2rem; font-weight: 600;"><?php echo $weekly_orders; ?></p>
@@ -209,11 +199,6 @@ $monthly_orders = $stmt->fetch()['monthly_orders'];
                     <h3>Monthly Orders</h3>
                     <p style="font-size: 2rem; font-weight: 600;"><?php echo $monthly_orders; ?></p>
                     <small>Orders this month</small>
-                </div>
-                <div style="background: linear-gradient(135deg, #ffc107, #e0a800); color: white; padding: 2rem; border-radius: 15px; text-align: center;">
-                    <h3>Today's Order Value</h3>
-                    <p style="font-size: 2rem; font-weight: 600;">RM <?php echo number_format($daily_order_value, 2); ?></p>
-                    <small>Excluding delivery fees</small>
                 </div>
                 <div style="background: linear-gradient(135deg, #17a2b8, #138496); color: white; padding: 2rem; border-radius: 15px; text-align: center;">
                     <h3>Monthly Order Value</h3>

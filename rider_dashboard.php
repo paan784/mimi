@@ -77,12 +77,6 @@ $today = date('Y-m-d');
 $week_start = date('Y-m-d', strtotime('monday this week'));
 $month_start = date('Y-m-01');
 
-// Daily, Weekly, Monthly Completed Orders Count
-// Daily completed orders
-$stmt = $pdo->prepare("SELECT COUNT(*) as daily_completed FROM orders WHERE rider_id = ? AND DATE(order_date) = ? AND order_status = 'Delivered'");
-$stmt->execute([$_SESSION['user_id'], $today]);
-$daily_completed = $stmt->fetch()['daily_completed'];
-
 // Weekly completed orders
 $stmt = $pdo->prepare("SELECT COUNT(*) as weekly_completed FROM orders WHERE rider_id = ? AND DATE(order_date) >= ? AND order_status = 'Delivered'");
 $stmt->execute([$_SESSION['user_id'], $week_start]);
@@ -231,14 +225,6 @@ $monthly_completed = $stmt->fetch()['monthly_completed'];
                 
                 <!-- Completed Orders Cards -->
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                    <div style="background: linear-gradient(135deg, #dc3545, #c82333); color: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(220,53,69,0.3);">
-                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📅</div>
-                        <h3 style="margin-bottom: 1rem;">Daily Completed</h3>
-                        <p style="font-size: 1.5rem; font-weight: 600; margin: 0;">
-                            <?php echo $daily_completed; ?>
-                        </p>
-                        <small>Orders completed today</small>
-                    </div>
                     <div style="background: linear-gradient(135deg, #fd7e14, #e55a00); color: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(253,126,20,0.3);">
                         <div style="font-size: 2.5rem; margin-bottom: 1rem;">📊</div>
                         <h3 style="margin-bottom: 1rem;">Weekly Completed</h3>
@@ -276,27 +262,32 @@ $monthly_completed = $stmt->fetch()['monthly_completed'];
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
                         <div style="text-align: center; padding: 1.5rem; background: #e8f5e8; border-radius: 10px; border: 2px solid #c3e6cb;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📅</div>
-                            <h4 style="color: #155724; margin-bottom: 1rem;">Today's Progress</h4>
-                            <p style="font-size: 1.25rem; font-weight: 600; color: #856404; margin-bottom: 0.5rem;">
-                                <?php echo $daily_completed; ?> completed
+                            <h4 style="color: #155724; margin-bottom: 1rem;">Weekly Progress</h4>
+                            <p style="font-size: 1.25rem; font-weight: 600; color: #155724; margin-bottom: 0.5rem;">
+                                <?php echo $weekly_completed; ?> completed
                             </p>
-                            <small style="color: #155724;">Deliveries finished today</small>
+                            <small style="color: #155724;">Deliveries this week</small>
                         </div>
                         <div style="text-align: center; padding: 1.5rem; background: #fff3cd; border-radius: 10px; border: 2px solid #ffeaa7;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
-                            <h4 style="color: #856404; margin-bottom: 1rem;">Weekly Progress</h4>
-                            <p style="font-size: 1.25rem; font-weight: 600; color: #0c5460; margin-bottom: 0.5rem;">
-                                <?php echo $weekly_completed; ?> completed
-                            </p>
-                            <small style="color: #856404;">Deliveries this week</small>
-                        </div>
-                        <div style="text-align: center; padding: 1.5rem; background: #d1ecf1; border-radius: 10px; border: 2px solid #bee5eb;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📈</div>
-                            <h4 style="color: #0c5460; margin-bottom: 1rem;">Monthly Progress</h4>
+                            <h4 style="color: #856404; margin-bottom: 1rem;">Monthly Progress</h4>
                             <p style="font-size: 1.25rem; font-weight: 600; color: #0c5460; margin-bottom: 0.5rem;">
                                 <?php echo $monthly_completed; ?> completed
                             </p>
-                            <small style="color: #0c5460;">Deliveries this month</small>
+                            <small style="color: #856404;">Deliveries this month</small>
+                        </div>
+                        <div style="text-align: center; padding: 1.5rem; background: #d1ecf1; border-radius: 10px; border: 2px solid #bee5eb;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📈</div>
+                            <h4 style="color: #0c5460; margin-bottom: 1rem;">Total Progress</h4>
+                            <?php
+                            $stmt = $pdo->prepare("SELECT COUNT(*) as total_completed FROM orders WHERE rider_id = ? AND order_status = 'Delivered'");
+                            $stmt->execute([$_SESSION['user_id']]);
+                            $total_completed = $stmt->fetch()['total_completed'];
+                            ?>
+                            <p style="font-size: 1.25rem; font-weight: 600; color: #0c5460; margin-bottom: 0.5rem;">
+                                <?php echo $total_completed; ?> completed
+                            </p>
+                            <small style="color: #0c5460;">All time deliveries</small>
                         </div>
                     </div>
                 </div>
