@@ -151,18 +151,18 @@ $week_start = date('Y-m-d', strtotime('monday this week'));
 $month_start = date('Y-m-01');
 
 // Daily orders count
-$stmt = $pdo->prepare("SELECT COUNT(*) as daily_orders FROM orders WHERE DATE(order_date) = ? OR (order_status = 'Delivered' AND DATE(order_date) = ?)");
-$stmt->execute([$today, $today]);
+$stmt = $pdo->prepare("SELECT COUNT(*) as daily_orders FROM orders WHERE DATE(order_date) = ?");
+$stmt->execute([$today]);
 $daily_orders = $stmt->fetch()['daily_orders'];
 
 // Weekly orders count
-$stmt = $pdo->prepare("SELECT COUNT(*) as weekly_orders FROM orders WHERE DATE(order_date) >= ? AND DATE(order_date) <= ?");
-$stmt->execute([$week_start, date('Y-m-d')]);
+$stmt = $pdo->prepare("SELECT COUNT(*) as weekly_orders FROM orders WHERE DATE(order_date) >= ?");
+$stmt->execute([$week_start]);
 $weekly_orders = $stmt->fetch()['weekly_orders'];
 
 // Monthly orders count
-$stmt = $pdo->prepare("SELECT COUNT(*) as monthly_orders FROM orders WHERE DATE(order_date) >= ? AND DATE(order_date) <= ?");
-$stmt->execute([$month_start, date('Y-m-d')]);
+$stmt = $pdo->prepare("SELECT COUNT(*) as monthly_orders FROM orders WHERE DATE(order_date) >= ?");
+$stmt->execute([$month_start]);
 $monthly_orders = $stmt->fetch()['monthly_orders'];
 ?>
 

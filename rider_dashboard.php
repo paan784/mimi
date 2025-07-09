@@ -79,18 +79,18 @@ $month_start = date('Y-m-01');
 
 // Daily, Weekly, Monthly Completed Orders Count
 // Daily completed orders
-$stmt = $pdo->prepare("SELECT COUNT(*) as daily_completed FROM orders WHERE rider_id = ? AND order_status = 'Delivered' AND DATE(order_date) = ?");
+$stmt = $pdo->prepare("SELECT COUNT(*) as daily_completed FROM orders WHERE rider_id = ? AND DATE(order_date) = ? AND order_status = 'Delivered'");
 $stmt->execute([$_SESSION['user_id'], $today]);
 $daily_completed = $stmt->fetch()['daily_completed'];
 
 // Weekly completed orders
-$stmt = $pdo->prepare("SELECT COUNT(*) as weekly_completed FROM orders WHERE rider_id = ? AND order_status = 'Delivered' AND DATE(order_date) >= ? AND DATE(order_date) <= ?");
-$stmt->execute([$_SESSION['user_id'], $week_start, date('Y-m-d')]);
+$stmt = $pdo->prepare("SELECT COUNT(*) as weekly_completed FROM orders WHERE rider_id = ? AND DATE(order_date) >= ? AND order_status = 'Delivered'");
+$stmt->execute([$_SESSION['user_id'], $week_start]);
 $weekly_completed = $stmt->fetch()['weekly_completed'];
 
 // Monthly completed orders
-$stmt = $pdo->prepare("SELECT COUNT(*) as monthly_completed FROM orders WHERE rider_id = ? AND order_status = 'Delivered' AND DATE(order_date) >= ? AND DATE(order_date) <= ?");
-$stmt->execute([$_SESSION['user_id'], $month_start, date('Y-m-d')]);
+$stmt = $pdo->prepare("SELECT COUNT(*) as monthly_completed FROM orders WHERE rider_id = ? AND DATE(order_date) >= ? AND order_status = 'Delivered'");
+$stmt->execute([$_SESSION['user_id'], $month_start]);
 $monthly_completed = $stmt->fetch()['monthly_completed'];
 ?>
 
