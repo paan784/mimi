@@ -318,6 +318,24 @@ $categories = $stmt->fetchAll();
                 <h2>Shopping Cart</h2>
                 <div id="cart-items"></div>
                 
+                <div class="cart-summary">
+                    <div class="cart-total">
+                        <span>Subtotal:</span>
+                        <span id="cart-subtotal">RM 0.00</span>
+                    </div>
+                    <div class="cart-total">
+                        <span>Delivery Fee:</span>
+                        <span id="delivery-fee">RM 5.00</span>
+                    </div>
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <span id="cart-total">RM 0.00</span>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="openModal('checkout-modal')" style="width: 100%; margin-top: 1rem;">
+                        Proceed to Checkout
+                    </button>
+                </div>
             </div>
             
             <!-- About Tab -->
