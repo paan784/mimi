@@ -107,7 +107,6 @@ $riders = $stmt->fetchAll();
                 <div class="nav-actions">
                     <button class="btn btn-secondary" onclick="refreshPage()" style="margin-right: 1rem;">🔄 Refresh</button>
                     <a href="staff_reports.php" class="btn btn-secondary" style="margin-right: 1rem;">📊 Reports</a>
-                    <button class="btn btn-secondary" onclick="showTab('profile')" style="margin-right: 1rem;">👤 Profile</button>
                     <span>Welcome, <?php echo $_SESSION['username']; ?>!</span>
                     <a href="logout.php" class="btn btn-danger">Logout</a>
                 </div>
@@ -120,7 +119,6 @@ $riders = $stmt->fetchAll();
             <div class="dashboard-tabs">
                 <button class="tab-btn active" onclick="showTab('orders')">📦 Order Management</button>
                 <button class="tab-btn" onclick="showTab('completed')">✅ Completed Orders</button>
-                <button class="tab-btn" onclick="showTab('profile')">👤 Profile</button>
             </div>
             
             <!-- Orders Tab -->
@@ -278,35 +276,6 @@ $riders = $stmt->fetchAll();
                 </div>
             </div>
             
-            <!-- Profile Tab -->
-            <div id="profile" class="tab-content">
-                <h2>👤 My Profile</h2>
-                <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <form method="POST" id="staff-profile-form">
-                        <div class="form-group">
-                            <label for="staff_name">Staff Name</label>
-                            <input type="text" id="staff_name" name="staff_name" class="form-control" value="<?php echo htmlspecialchars($staff['staff_name']); ?>" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="staff_email">Email</label>
-                            <input type="email" id="staff_email" name="staff_email" class="form-control" value="<?php echo htmlspecialchars($staff['staff_email']); ?>" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="staff_phone">Phone Number</label>
-                            <input type="tel" id="staff_phone" name="staff_phone" class="form-control" value="<?php echo htmlspecialchars($staff['staff_phonenumber']); ?>" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="staff_password">New Password (leave blank to keep current)</label>
-                            <input type="password" id="staff_password" name="staff_password" class="form-control">
-                        </div>
-                        
-                        <button type="submit" name="update_profile" class="btn btn-primary" style="width: 100%;" onclick="return validateStaffProfile()">Update Profile</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 </div>
