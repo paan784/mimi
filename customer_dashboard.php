@@ -138,7 +138,6 @@ $categories = $stmt->fetchAll();
                     <button class="btn btn-secondary" onclick="showTab('profile')" style="margin-right: 1rem;">👤 Profile</button>
                     <a href="customer_orders.php" class="btn btn-secondary" style="margin-right: 1rem;">📋 My Orders</a>
                     <span>Welcome, <?php echo $_SESSION['username']; ?>!</span>
-                    <span class="btn btn-secondary" onclick="showTab('cart')">🛒 Cart (<span id="cart-count">0</span>)</span>
                     <a href="logout.php" class="btn btn-danger">Logout</a>
                 </div>
             </div>
@@ -151,7 +150,7 @@ $categories = $stmt->fetchAll();
                 <button class="tab-btn active" onclick="showTab('home')">🏠 Home</button>
                 <button class="tab-btn" onclick="showTab('menu')">📋 Menu</button>
                 <button class="tab-btn" onclick="showTab('about')">ℹ️ About Us</button>
-                <button class="tab-btn" onclick="showTab('cart')">🛒 Cart</button>
+                <button class="tab-btn" onclick="showTab('cart')">🛒 Cart (<span id="cart-count">0</span>)</button>
             </div>
             
             <!-- Home Tab -->

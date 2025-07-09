@@ -107,7 +107,6 @@ $riders = $stmt->fetchAll();
                 <div class="nav-actions">
                     <button class="btn btn-secondary" onclick="refreshPage()" style="margin-right: 1rem;">🔄 Refresh</button>
                     <a href="staff_reports.php" class="btn btn-secondary" style="margin-right: 1rem;">📊 Reports</a>
-                    <button class="btn btn-secondary" onclick="showTab('profile')" style="margin-right: 1rem;">👤 Profile</button>
                     <span>Welcome, <?php echo $_SESSION['username']; ?>!</span>
                     <a href="logout.php" class="btn btn-danger">Logout</a>
                 </div>
