@@ -108,6 +108,7 @@ $riders = $stmt->fetchAll();
                     <button class="btn btn-secondary" onclick="refreshPage()" style="margin-right: 1rem;">🔄 Refresh</button>
                     <a href="staff_reports.php" class="btn btn-secondary" style="margin-right: 1rem;">📊 Reports</a>
                     <span>Welcome, <?php echo $_SESSION['username']; ?>!</span>
+                    <button class="btn btn-secondary" onclick="showTab('profile')" style="margin-right: 1rem;">👤 Profile</button>
                     <a href="logout.php" class="btn btn-danger">Logout</a>
                 </div>
             </div>
@@ -119,7 +120,6 @@ $riders = $stmt->fetchAll();
             <div class="dashboard-tabs">
                 <button class="tab-btn active" onclick="showTab('orders')">📦 Order Management</button>
                 <button class="tab-btn" onclick="showTab('completed')">✅ Completed Orders</button>
-                <button class="tab-btn" onclick="showTab('profile')">👤 Profile</button>
             </div>
             
             <!-- Orders Tab -->
